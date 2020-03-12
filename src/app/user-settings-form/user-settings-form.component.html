@@ -1,17 +1,17 @@
 <div class="container">
 
   <h2>User Settings</h2>
-  <form action="">
+  <form action="" #form="ngForm">
 
     <div class="form-group">
       <label for="name">Name</label>
       <input id="name" name="name" class="form-control" placeholder="Name"
-             type="text">
+             type="text" [(ngModel)]="userSettings.name">
     </div>
 
     <div class="form-check form-group">
       <input type="checkbox" class="form-check-input" id="email-offers"
-             name="email-offers">
+             name="email-offers" [(ngModel)]="userSettings.emailOffers">
       <label for="email-offers" class="form-check-label">Email Special
         Offers</label>
     </div>
@@ -20,24 +20,25 @@
     <div class="form-group">
       <div class="form-check">
         <input type="radio" class="form-check-input" id="light-interface"
-               name="interface-style" value="light" checked>
+               name="interface-style" value="light" checked [(ngModel)]="userSettings.interfaceStyle">
         <label for="light-interface" class="form-check-label">Light</label>
       </div>
       <div class="form-check">
         <input type="radio" class="form-check-input" id="medium-interface"
-               name="interface-style" value="medium">
+               name="interface-style" value="medium" [(ngModel)]="userSettings.interfaceStyle">
         <label for="medium-interface" class="form-check-label">Medium</label>
       </div>
       <div class="form-check">
         <input type="radio" class="form-check-input" id="dark-interface"
-               name="interface-style" value="dark">
+               name="interface-style" value="dark" [(ngModel)]="userSettings.interfaceStyle">
         <label for="dark-interface" class="form-check-label">Dark</label>
       </div>
     </div>
 
     <div class="form-group">
       <label for="subscription-type">Subscription Type</label>
-      <select name="" id="subscription-type" class="form-control">
+      <select name="subscription-type" id="subscription-type"
+              class="form-control" [(ngModel)]="userSettings.subscriptionType">
         <option value="">Monthly</option>
         <option value="">Annual</option>
         <option value="">Lifetime</option>
@@ -46,10 +47,12 @@
 
     <div class="form-group">
       <label for="notes">Notes</label>
-      <textarea name="notes" id="notes" rows="3"
-                class="form-control"></textarea>
+      <textarea name="notes" id="notes" rows="3" class="form-control" [(ngModel)]="userSettings.notes">
+      </textarea>
     </div>
 
     <button class="btn btn-primary">Send</button>
   </form>
 </div>
+
+{{ userSettings | json }}
