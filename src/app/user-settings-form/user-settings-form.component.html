@@ -5,10 +5,15 @@
 
     <div class="form-group">
       <label for="name">Name</label>
-      <input id="name" name="name" class="form-control" [class.field-error]="form.submitted && nameField.invalid" placeholder="Name"
-             type="text" [(ngModel)]="userSettings.name" required (blur)="onBlur(nameField)"
+      <input id="name" name="name" class="form-control"
+             [class.field-error]="form.submitted && nameField.invalid"
+             placeholder="Name"
+             type="text" [(ngModel)]="userSettings.name" required
+             (blur)="onBlur(nameField)"
              #nameField="ngModel">
-      <div [hidden]="nameField.valid || !form.submitted" class="alert alert-danger">Enter a name</div>
+      <div [hidden]="nameField.valid || !form.submitted"
+           class="alert alert-danger">Enter a name
+      </div>
     </div>
 
     <div class="form-check form-group">
@@ -45,9 +50,7 @@
       <label for="subscription-type">Subscription Type</label>
       <select name="subscription-type" id="subscription-type"
               class="form-control" [(ngModel)]="userSettings.subscriptionType">
-        <option value="">Monthly</option>
-        <option value="">Annual</option>
-        <option value="">Lifetime</option>
+        <option *ngFor="let type of (subscriptionTypes$ | async)">{{ type }}</option>
       </select>
     </div>
 
@@ -58,6 +61,9 @@
       </textarea>
     </div>
 
+    <div [hidden]="!postError" class="alert alert-danger">
+      {{ postErrorMessage }}
+    </div>
     <button class="btn btn-primary">Send</button>
   </form>
 </div>
