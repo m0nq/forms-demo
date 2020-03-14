@@ -16,6 +16,32 @@
       </div>
     </div>
 
+    <div class="form-group">
+      <label for="startDate">Start Date</label>
+      <input type="text" placeholder="Start Date" class="form-control"
+             [(ngModel)]="startDate" name="startDate" id="startDate"
+             bsDaterangepicker>
+    </div>
+
+    <div class="form-group">
+      <label for="startTime">Start Time</label>
+      <timepicker id="startTime" [(ngModel)]="startTime" name="startTime"></timepicker>
+    </div>
+
+    <div class="form-group">
+      User Rating
+      <rating [(ngModel)]="userRating" [max]="maxRating" [readonly]="isReadonly"
+              name="userRating" id="userRating"
+              [titles]="['one','two','three']"></rating>
+    </div>
+
+    User Rating : {{ userRating }}
+
+    <button class="btn btn-primary" type="button" [(ngModel)]="singleModel"
+            btnCheckbox btnCheckboxTrue="On" btnCheckboxFalse="Off"
+            name="singleModel">{{ singleModel }}
+    </button>
+
     <div class="form-check form-group">
       <input type="checkbox" class="form-check-input" id="email-offers"
              name="email-offers" [(ngModel)]="userSettings.emailOffers">
@@ -26,23 +52,15 @@
 
     <h5>User Interface Style</h5>
     <div class="form-group">
-      <div class="form-check">
-        <input type="radio" class="form-check-input" id="light-interface"
-               name="interface-style" value="light" checked
-               [(ngModel)]="userSettings.interfaceStyle">
-        <label for="light-interface" class="form-check-label">Light</label>
-      </div>
-      <div class="form-check">
-        <input type="radio" class="form-check-input" id="medium-interface"
-               name="interface-style" value="medium"
-               [(ngModel)]="userSettings.interfaceStyle">
-        <label for="medium-interface" class="form-check-label">Medium</label>
-      </div>
-      <div class="form-check">
-        <input type="radio" class="form-check-input" id="dark-interface"
-               name="interface-style" value="dark"
-               [(ngModel)]="userSettings.interfaceStyle">
-        <label for="dark-interface" class="form-check-label">Dark</label>
+      <div class="btn-group">
+        <label class="btn btn-primary" [(ngModel)]="userSettings.interfaceStyle"
+               name="interfaceStyle" btnRadio="Light" tabindex="0"
+               role="button">Light</label>
+        <label class="btn btn-primary" [(ngModel)]="userSettings.interfaceStyle"
+               name="interfaceStyle" btnRadio="Medium" tabindex="0"
+               role="button">Medium</label>
+        <label class="btn btn-primary" [(ngModel)]="userSettings.interfaceStyle"
+               name="interfaceStyle" btnRadio="Dark" tabindex="0" role="button">Dark</label>
       </div>
     </div>
 
@@ -50,7 +68,8 @@
       <label for="subscription-type">Subscription Type</label>
       <select name="subscription-type" id="subscription-type"
               class="form-control" [(ngModel)]="userSettings.subscriptionType">
-        <option *ngFor="let type of (subscriptionTypes$ | async)">{{ type }}</option>
+        <option
+          *ngFor="let type of (subscriptionTypes$ | async)">{{ type }}</option>
       </select>
     </div>
 
@@ -67,5 +86,3 @@
     <button class="btn btn-primary">Send</button>
   </form>
 </div>
-
-{{ userSettings | json }}

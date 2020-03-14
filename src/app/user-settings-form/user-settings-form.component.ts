@@ -23,27 +23,26 @@ export class UserSettingsFormComponent implements OnInit {
   postError = false;
   postErrorMessage = '';
   subscriptionTypes$: Observable<string[]>;
+  singleModel = 'On';
+  startDate: Date;
+  startTime: string;
+  userRating: number;
+  maxRating: number;
+  isReadonly: boolean;
 
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
     this.subscriptionTypes$ = this.dataService.getSubscriptionTypes();
+    this.startDate = new Date();
+    this.startTime = `${this.startDate.getUTCHours()}:${this.startDate.getUTCMinutes()}`;
+    this.userRating = 0;
+    this.maxRating = 10;
+    this.isReadonly = false;
   }
 
   onSubmit(form: NgForm) {
-    console.log('In onSubmit: ', form.valid);
-    if (form.valid) {
-      this.postError = false;
-      this.postErrorMessage = '';
-      this.dataService.postUserSettingsForm(this.userSettings)
-        .subscribe(
-          result => console.log('Success ->', result),
-          err => this.onHttpError(err)
-        );
-    } else {
-      this.postError = true;
-      this.postErrorMessage = 'Please fix the above errors';
-    }
+    console.log('In onSubmit: ', form.value);
   }
 
   onBlur(field: NgModel) {
